@@ -11,7 +11,7 @@ const PreviewVideo = () => {
           <RiUserLine className="text-2xl" />
         </div>
       </div>
-      <Control />
+      <Control showSetting={true} />
       <TypeName />
     </div>
   );
