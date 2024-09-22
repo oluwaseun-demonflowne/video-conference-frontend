@@ -35,9 +35,9 @@ const OpenMenu = ({ openMenuState }: Props) => {
     });
   }, [openMenuState]);
 
-  //   if (!openMenuState) {
-  //     return null;
-  //   }
+    if (!openMenuState) {
+      return null;
+    }
   return (
     <>
       <div

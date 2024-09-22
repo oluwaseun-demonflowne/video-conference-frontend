@@ -4,7 +4,7 @@ import Control from "../HostPreviewPage/Control";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { MdEmojiEmotions } from "react-icons/md";
 import { TbLogin } from "react-icons/tb";
-import { useModalState } from "@/store";
+import { useModalState, useSideBarState } from "@/store";
 import { FiMessageSquare } from "react-icons/fi";
 import { GoPeople } from "react-icons/go";
 import { LuMenu } from "react-icons/lu";
@@ -16,6 +16,7 @@ const LiveControl = () => {
   const [openMenuState, setOpenMenuState] = useState(false);
   const [openEndLeaveSession, setOpenEndLeaveSession] = useState(false);
   const { menuRef } = useCloseMenuWhenClickedOutside(setOpenMenuState);
+  const { showSideBar, setShowSideBar } = useSideBarState();
   const { setShowModal } = useModalState();
   return (
     <div className="flex items-center justify-between px-8 py-4">
@@ -23,7 +24,8 @@ const LiveControl = () => {
       <div className="flex items-center gap-4">
         <HiEllipsisVertical className="text-2xl" />
         <MdEmojiEmotions className="text-xl" />
-        <div className="flex items-baseline rounded-md bg-[#c74e5b] px-4 py-1">
+        <div
+          className={`flex items-baseline rounded-md ${openEndLeaveSession ? "bg-[#11131a]" : "bg-[#c74e5b]"} px-4 py-1`}>
           <div className="relative">
             <button
               onClick={() => {
@@ -31,9 +33,7 @@ const LiveControl = () => {
               }}>
               <TbLogin className="text-2xl text-slate-300 hover:text-white" />
             </button>
-            <LeaveEndStream
-              openEndLeaveSession={openEndLeaveSession}
-            />
+            <LeaveEndStream openEndLeaveSession={openEndLeaveSession} />
           </div>
           <button
             onClick={() => {
@@ -48,7 +48,11 @@ const LiveControl = () => {
         <button className="rounded-sm border border-gray-600 p-1">
           <FiMessageSquare />
         </button>
-        <button className="flex items-center gap-3 rounded-sm border border-gray-600 px-2 py-1">
+        <button
+          onClick={() => {
+            setShowSideBar(!showSideBar);
+          }}
+          className={`flex items-center gap-3 rounded-sm border border-gray-600 px-2 py-1 ${showSideBar ? "bg-[#2e3038]" : ""}`}>
           <GoPeople />
           <p className="text-[14px]">5</p>
         </button>

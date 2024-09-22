@@ -8,6 +8,28 @@ body {
   overflow: hidden;
 }
 
+
+.sidebar {
+  scrollbar-width: thin;
+}
+
+.remove-overflow::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  /* width: 2px; */
+}
+.sidebar::-webkit-scrollbar-track {
+  background-color: red;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: red;
+  outline: 1px solid gold;
+}
+
+
+
 .modal {
   background-color: rgba(0, 0, 0, 0.6);
 }
