@@ -34,7 +34,7 @@ const Broadcaster = () => {
           <p>{i.name}</p>
           <div className="flex items-center gap-2">
             <button className="rounded-full bg-[#272a31] p-1">
-            <SiAudioboom />
+              <SiAudioboom />
             </button>
             <button
               ref={(el) => {

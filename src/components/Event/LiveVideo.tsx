@@ -1,15 +1,20 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import LoadingIcon from "./LoadingIcon";
 import LiveControl from "./LiveControl";
 import SideBar from "../my-own-ui/SideBar/SideBar";
 import { useSideBarState } from "@/store";
 import { IoStopCircleOutline } from "react-icons/io5";
 import EndStreamTopRight from "../my-own-ui/EndStreamTopRight";
+import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenClickedOutside";
+import YouAreInvited from "../my-own-ui/YouAreInvited";
 
 const LiveVideo = () => {
   const { showSideBar } = useSideBarState();
+  const [openRightStream, setOpenRightStream] = useState(false);
+  const [showInvitedModal, setShowInvitedModal] = useState(false);
+  const { menuRef } = useCloseMenuWhenClickedOutside(setOpenRightStream);
   return (
     <div className="flex h-screen flex-col justify-between">
       <div className="flex items-center justify-between px-8 py-4">
@@ -22,16 +27,28 @@ const LiveVideo = () => {
         />
         <div className="flex items-center gap-3 text-[15px]">
           <p className="h-fit w-fit rounded-full bg-red-700 p-1"></p>
-          <div className="border rounded-md flex items-center">
-          <p>LIVE</p>
-          <p className="text-slate-400">1:23</p>
-          <div className="flex relative gap-1 text-sm text-slate-400">
-            <button className=" flex gap-1">
-            <IoStopCircleOutline />
-            <span>End</span>
-            </button>
-            <EndStreamTopRight />
-          </div>
+          <div className="flex items-center rounded-md border border-slate-600">
+            <div className="flex items-center gap-3 px-2 py-1">
+              <p className="h-fit w-fit rounded-full bg-red-700 p-1"></p>
+              <p>LIVE</p>
+              <p className="text-slate-400">1:23</p>
+            </div>
+            <div
+              ref={menuRef}
+              className="relative flex gap-1 border-l border-slate-600 px-2 py-1 text-sm">
+              <button
+                onClick={() => {
+                  setOpenRightStream(true);
+                }}
+                className={`flex ${openRightStream ? "pointer-events-none text-slate-400" : "text-white"} items-center gap-1`}>
+                <IoStopCircleOutline />
+                <span>End</span>
+              </button>
+              <EndStreamTopRight
+                openRightStream={openRightStream}
+                setOpenRightStream={setOpenRightStream}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -53,6 +70,10 @@ const LiveVideo = () => {
         <SideBar />
       </div>
       <LiveControl />
+      <YouAreInvited
+        showInvitedModal={showInvitedModal}
+        setShowInvitedModal={setShowInvitedModal}
+      />
     </div>
   );
 };

@@ -33,7 +33,7 @@ const name = [
   { id: 24, name: "Clinton" },
   { id: 25, name: "Edwards" },
   { id: 26, name: "Clinton" },
-  { id: 27, name: "Edwards" },
+  { id: 27, name: "Edwards" }
 ];
 
 const Viewer = () => {

@@ -15,7 +15,7 @@ export const useCloseMenuWhenClickedOutside = (
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuRef]);
 
   return { menuRef };

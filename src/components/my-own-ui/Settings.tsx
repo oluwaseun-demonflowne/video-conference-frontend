@@ -12,7 +12,6 @@ const displaySetting = {
 };
 
 const Settings = () => {
-  
   const [currentDisplay, setCurrentDisplay] =
     useState<keyof typeof displaySetting>("device");
   const { showModal } = useModalState();

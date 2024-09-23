@@ -4,23 +4,28 @@ import { CgUserRemove } from "react-icons/cg";
 import { PiMicrophoneStage } from "react-icons/pi";
 
 type Props = {
-    iwasclicked:number;
+  iwasclicked: number;
   currentIndex: number;
   openMenu: boolean;
   setOpenMenu: Dispatch<SetStateAction<boolean>>;
 };
 
-const HandRaisedMenu = ({ iwasclicked,currentIndex, openMenu, setOpenMenu }: Props) => {
+const HandRaisedMenu = ({
+  iwasclicked,
+  currentIndex,
+  openMenu,
+  setOpenMenu
+}: Props) => {
   if (!openMenu) {
     return null;
   }
 
-  if(iwasclicked !== currentIndex) {
-    return null
+  if (iwasclicked !== currentIndex) {
+    return null;
   }
 
   return (
-    <div className="fixed font-medium top-[1% * 10] right-16 !z-[99999] flex w-[200px] flex-col rounded-md border border-gray-600 bg-[#191b23]">
+    <div className="top-[1% * 10] fixed right-16 !z-[99999] flex w-[200px] flex-col rounded-md border border-gray-600 bg-[#191b23] font-medium">
       <button
         onClick={() => {
           setOpenMenu(false);
@@ -41,7 +46,7 @@ const HandRaisedMenu = ({ iwasclicked,currentIndex, openMenu, setOpenMenu }: Pro
         onClick={() => {
           setOpenMenu(false);
         }}
-        className="flex text-[#c74e5b] items-center gap-2 px-4 py-3 text-sm">
+        className="flex items-center gap-2 px-4 py-3 text-sm text-[#c74e5b]">
         <CgUserRemove className="text-lg" />
         <p>Remove Participant</p>
       </button>

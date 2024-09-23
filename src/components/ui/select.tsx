@@ -122,9 +122,7 @@ const SelectItem = React.forwardRef<
       className
     )}
     {...props}>
-    <SelectPrimitive.ItemText>
-      {children}
-    </SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ));
 SelectItem.displayName = SelectPrimitive.Item.displayName;

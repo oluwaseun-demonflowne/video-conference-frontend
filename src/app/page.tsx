@@ -1,11 +1,9 @@
-import SideBar from '@/components/my-own-ui/SideBar/SideBar'
-import React from 'react'
-
+import SideBar from "@/components/my-own-ui/SideBar/SideBar";
+import StartSharing from "@/components/my-own-ui/StartSharing";
+import React from "react";
 
 const page = () => {
-  return (
-    <SideBar />
-  )
-}
+  return <StartSharing />;
+};
 
-export default page
+export default page;

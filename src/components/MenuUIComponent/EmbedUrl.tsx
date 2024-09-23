@@ -18,7 +18,6 @@ const EmbedUrl = () => {
         className="mt-[-20px] h-12 rounded-md bg-[#191b23] pl-4 text-[15px] outline-none"
         placeholder="Enter your URL"
       />
-      
     </>
   );
 };

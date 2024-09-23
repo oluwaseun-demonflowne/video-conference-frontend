@@ -6,12 +6,18 @@ type ModalState = {
 type SideBarState = {
   showSideBar: boolean;
 };
+type ScreenState = {
+  screenToDisplay: "chats" | "participant";
+};
 
 type Action = {
   setShowModal: (state: boolean) => void;
 };
 type SideBarAction = {
   setShowSideBar: (state: boolean) => void;
+};
+type ScreenStateAction = {
+  setScreenToDisplay: (state: "chats" | "participant") => void;
 };
 
 export const useModalState = create<ModalState & Action>((set) => ({
@@ -26,3 +32,11 @@ export const useSideBarState = create<SideBarState & SideBarAction>((set) => ({
     set(() => ({ showSideBar: state }));
   }
 }));
+export const useScreenToDisplay = create<ScreenState & ScreenStateAction>(
+  (set) => ({
+    screenToDisplay: "chats",
+    setScreenToDisplay: (state) => {
+      set(() => ({ screenToDisplay: state }));
+    }
+  })
+);

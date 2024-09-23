@@ -31,10 +31,10 @@ const Notification = () => {
           className="cursor-pointer text-lg opacity-50 hover:opacity-90"
         />
       </div>
-      <div className="flex mt-6 flex-col gap-6">
+      <div className="mt-6 flex flex-col gap-6">
         {NotiOptions.map((i) => (
-          <div key={i.label} className="flex justify-between items-center">
-            <div className="flex gap-3 items-center">
+          <div key={i.label} className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
               <p className="text-lg">{i.icon}</p>
               <p className="text-[15px]">{i.label}</p>
             </div>
