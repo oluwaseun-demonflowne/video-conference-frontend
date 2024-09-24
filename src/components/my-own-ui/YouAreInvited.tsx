@@ -8,8 +8,8 @@ type Props = {
   setShowInvitedModal: Dispatch<SetStateAction<boolean>>;
 };
 
-const YouAreInvited = ({showInvitedModal, setShowInvitedModal}:Props) => {
-  if(!showInvitedModal) return null
+const YouAreInvited = ({ showInvitedModal, setShowInvitedModal }: Props) => {
+  if (!showInvitedModal) return null;
   return (
     <div className="modal fixed bottom-0 left-0 right-0 top-0 flex h-screen items-center justify-center">
       <div className="flex flex-col justify-center gap-3 overflow-hidden rounded-xl bg-[#191b23] p-6">
@@ -32,7 +32,11 @@ const YouAreInvited = ({showInvitedModal, setShowInvitedModal}:Props) => {
         </div>
         <Control noBackground={true} showSetting={true} />
         <div className="flex gap-3">
-          <button onClick={() => {setShowInvitedModal(false)}} className="h-14 w-[50%] rounded-md border border-gray-500">
+          <button
+            onClick={() => {
+              setShowInvitedModal(false);
+            }}
+            className="h-14 w-[50%] rounded-md border border-gray-500">
             Decline
           </button>
           <button className="h-14 w-[50%] rounded-md bg-[#2582ed]">

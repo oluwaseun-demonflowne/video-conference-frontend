@@ -7,8 +7,6 @@ import { LuSettings } from "react-icons/lu";
 import { TbPictureInPictureTop } from "react-icons/tb";
 import Settings from "./Settings";
 import { useModalState } from "@/store";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import ChangeNameEmbedLinkMenu from "./ChangeNameEmbedLinkMenu";
 
 const menuLink = [
@@ -27,22 +25,12 @@ const OpenMenu = ({ openMenuState }: Props) => {
   const { setShowModal } = useModalState();
   const [showEmbedNameMenu, setShowEmbedNameMenu] = useState(false);
 
-  useGSAP(() => {
-    gsap.to("#menu", {
-      x: openMenuState ? "0px" : "500px",
-      duration: 0.7,
-      opacity: 1
-    });
-  }, [openMenuState]);
-
   if (!openMenuState) {
     return null;
   }
   return (
     <>
-      <div
-        id="menu"
-        className="absolute bottom-12 right-0 flex w-[230px] translate-x-[500px] flex-col gap-2 rounded-md border border-gray-600 bg-[#111318] p-3 text-[14px] opacity-0">
+      <div className="o absolute bottom-12 right-0 flex w-[230px] flex-col gap-2 rounded-md border border-gray-600 bg-[#111318] p-3 text-[14px]">
         {menuLink.map((i) => (
           <button
             onClick={() => {

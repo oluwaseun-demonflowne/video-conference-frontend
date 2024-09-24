@@ -1,9 +1,8 @@
-import SideBar from "@/components/my-own-ui/SideBar/SideBar";
-import StartSharing from "@/components/my-own-ui/StartSharing";
+import SharePDF from "@/components/my-own-ui/SharePDF";
 import React from "react";
 
 const page = () => {
-  return <StartSharing />;
+  return <SharePDF />;
 };
 
 export default page;

@@ -13,7 +13,7 @@ const Title = () => {
           onClick={() => {
             setScreenToDisplay("chats");
           }}
-          className={`h-12 ${screenToDisplay === "chats" ? "bg-[#272a31]" : ""} w-[100%] rounded-md  text-[15px]`}>
+          className={`h-12 ${screenToDisplay === "chats" ? "bg-[#272a31]" : ""} w-[100%] rounded-md text-[15px]`}>
           Chat
         </button>
         <button

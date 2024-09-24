@@ -9,20 +9,19 @@ const session = {
 };
 
 type Props = {
-    openRightStream: boolean;
-    setOpenRightStream : Dispatch<SetStateAction<boolean>>
-}
+  openRightStream: boolean;
+  setOpenRightStream: Dispatch<SetStateAction<boolean>>;
+};
 
-const EndStreamTopRight = ({openRightStream,setOpenRightStream}:Props) => {
-    
-    if(!openRightStream) return null
+const EndStreamTopRight = ({ openRightStream, setOpenRightStream }: Props) => {
+  if (!openRightStream) return null;
   return (
     <div className="absolute right-0 top-11 z-[90] flex w-[280px] flex-col justify-center gap-3 overflow-hidden rounded-xl bg-[#11131a] p-5">
       <p className="text-[14px] text-slate-400">{session.end.note}</p>
       <div className="flex gap-2 text-[14px] text-white">
         <button
           onClick={() => {
-            setOpenRightStream(false)
+            setOpenRightStream(false);
           }}
           type="button"
           className="h-12 w-[50%] rounded-md border border-slate-600">

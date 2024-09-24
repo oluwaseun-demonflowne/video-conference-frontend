@@ -3,7 +3,7 @@ import React from "react";
 
 const EmptyChat = () => {
   return (
-    <div className="text-center px-7 flex flex-col gap-3 items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-3 px-7 text-center">
       <Image
         src={"/Chat Empty.png"}
         alt="empty chat image"

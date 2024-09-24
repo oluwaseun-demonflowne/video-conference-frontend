@@ -4,11 +4,11 @@ import InputBox from "./InputBox";
 
 const MainChat = () => {
   return (
-    <div className="mt-4 flex  h-[60vh] flex-col justify-between">
+    <div className="mt-4 flex h-[60vh] flex-col justify-between">
       <div className="flex h-[100%] items-center justify-center">
-      <EmptyChat />
+        <EmptyChat />
       </div>
-      <InputBox  />
+      <InputBox />
     </div>
   );
 };

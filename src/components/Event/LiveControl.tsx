@@ -11,14 +11,20 @@ import { LuMenu, LuScreenShare } from "react-icons/lu";
 import OpenMenu from "../my-own-ui/OpenMenu";
 import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenClickedOutside";
 import LeaveEndStream from "../my-own-ui/LeaveEndStream";
+import StartSharing from "../my-own-ui/StartSharing";
+import SharePDF from "../my-own-ui/SharePDF";
 
 const LiveControl = () => {
   const [openMenuState, setOpenMenuState] = useState(false);
   const [openEndLeaveSession, setOpenEndLeaveSession] = useState(false);
+  const [openStartSharing, setOpenStartSharing] = useState(false);
+  const [openSharePdf, setOpenSharePdf] = useState(false);
   const { menuRef } = useCloseMenuWhenClickedOutside(setOpenMenuState);
   const { menuRef: KRef } = useCloseMenuWhenClickedOutside(
     setOpenEndLeaveSession
   );
+  const { menuRef: startScreenRef } =
+    useCloseMenuWhenClickedOutside(setOpenStartSharing);
   const { showSideBar, setShowSideBar } = useSideBarState();
   const { setScreenToDisplay } = useScreenToDisplay();
 
@@ -27,18 +33,32 @@ const LiveControl = () => {
     <div className="flex items-center justify-between px-8 py-4">
       <Control />
       <div className="flex items-center gap-4">
-        <div className="flex bg-[#2e3038] py-1 px-3 rounded-md gap-1">
-          <button>
+        <div
+          ref={startScreenRef}
+          className={`relative flex gap-1 rounded-md ${openStartSharing ? "bg-[#2e3038]" : ""} px-3 py-2`}>
+          <button
+            onClick={() => {
+              setOpenStartSharing((prev) => !prev);
+            }}>
             <LuScreenShare className="text-xl" />
           </button>
           <button>
             <HiEllipsisVertical className="text-2xl" />
           </button>
+          <StartSharing
+            openStartSharing={openStartSharing}
+            setOpenStartSharing={setOpenStartSharing}
+            setOpenSharePdf={setOpenSharePdf}
+          />
+          <SharePDF
+            openSharePdf={openSharePdf}
+            setOpenSharePdf={setOpenSharePdf}
+          />
         </div>
         <MdEmojiEmotions className="text-xl" />
         <div
           className={`flex items-baseline rounded-md ${openEndLeaveSession ? "bg-[#11131a]" : "bg-[#c74e5b]"} px-4 py-1`}>
-          <div ref={KRef} className="relative">
+          <div ref={KRef} className={` ${openStartSharing ? "" : "relative"}`}>
             <button
               onClick={() => {
                 setOpenEndLeaveSession((prev) => !prev);
@@ -74,7 +94,7 @@ const LiveControl = () => {
           <GoPeople />
           <p className="text-[14px]">5</p>
         </button>
-        <div ref={menuRef} className="relative">
+        <div ref={menuRef} className={` ${openStartSharing ? "" : "relative"}`}>
           <button
             className="rounded-sm bg-[#2e3038] p-2"
             onClick={() => {

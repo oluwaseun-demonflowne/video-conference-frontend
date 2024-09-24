@@ -1,5 +1,3 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import React, { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { IoStopCircleOutline } from "react-icons/io5";
@@ -17,13 +15,6 @@ const LeaveEndStream = ({ openEndLeaveSession }: Props) => {
     whichSession: "end",
     state: false
   });
-  useGSAP(() => {
-    gsap.to("#menus", {
-      y: openEndLeaveSession ? "0px" : "400px",
-      duration: 0.3,
-      opacity: openEndLeaveSession ? 1 : 0
-    });
-  }, [openEndLeaveSession]);
 
   if (!openEndLeaveSession) {
     return null;
@@ -31,9 +22,7 @@ const LeaveEndStream = ({ openEndLeaveSession }: Props) => {
 
   return (
     <>
-      <div
-        id="menus"
-        className="absolute bottom-12 left-[-640%] w-[350px] translate-y-[400px] overflow-hidden rounded-md text-slate-300 opacity-0">
+      <div className="absolute bottom-12 left-[-640%] w-[350px] overflow-hidden rounded-md text-slate-300">
         <button
           onClick={() => {
             setEndLeaveSessionOpen((prev) => ({

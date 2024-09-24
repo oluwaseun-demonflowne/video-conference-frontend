@@ -9,7 +9,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { useModalState } from "@/store";
-import { FiVideo, FiVideoOff } from "react-icons/fi";
+import { FiVideo} from "react-icons/fi";
 import { AiOutlineAudio } from "react-icons/ai";
 import { SpeakerIcon } from "lucide-react";
 
@@ -20,7 +20,7 @@ const Device = () => {
     MediaDeviceInfo[]
   >([]);
   const { showModal, setShowModal } = useModalState();
-  const [volumeCurrent, setVolumeCurrent] = useState(100);
+  const [_volumeCurrent, setVolumeCurrent] = useState(100);
   //   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
   //   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
   useEffect(() => {
