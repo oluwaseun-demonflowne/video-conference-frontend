@@ -1,8 +1,7 @@
-import SharePDF from "@/components/my-own-ui/SharePDF";
 import React from "react";
 
 const page = () => {
-  return <SharePDF />;
+  return <p>hello</p>;
 };
 
 export default page;
