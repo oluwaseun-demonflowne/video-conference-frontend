@@ -9,7 +9,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { useModalState } from "@/store";
-import { FiVideo} from "react-icons/fi";
+import { FiVideo } from "react-icons/fi";
 import { AiOutlineAudio } from "react-icons/ai";
 import { SpeakerIcon } from "lucide-react";
 
