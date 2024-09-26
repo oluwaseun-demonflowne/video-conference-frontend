@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { useModalState } from "@/store";
+import { useCameraState, useModalState } from "@/store";
 import { FiVideo } from "react-icons/fi";
 import { AiOutlineAudio } from "react-icons/ai";
 import { SpeakerIcon } from "lucide-react";
@@ -21,8 +21,8 @@ const Device = () => {
   //   MediaDeviceInfo[]
   // >([]);
   const { showModal, setShowModal } = useModalState();
-  const { videoDevices, audioDevices, outputAudioDevices } =
-    useChooseAudioVideo(showModal);
+  useChooseAudioVideo(showModal);
+  const { videoDevices, audioDevices, outputAudioDevices } = useCameraState();
   const [_volumeCurrent, setVolumeCurrent] = useState(100);
   // //   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
   // //   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");

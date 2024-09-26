@@ -1,10 +1,10 @@
 "use client";
-import React, { type Dispatch, type SetStateAction } from "react";
+import React, { useState } from "react";
 import { AiOutlineAudio, AiOutlineAudioMuted } from "react-icons/ai";
 import { FiVideo, FiVideoOff } from "react-icons/fi";
 import { LuSettings } from "react-icons/lu";
 import Settings from "../my-own-ui/Settings";
-import { useModalState } from "@/store";
+import { useCameraState, useModalState } from "@/store";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { useCloseModalWhenEscClicked } from "@/custom hooks/useCloseModalWhenEscClicked";
 import AllDevice from "../my-own-ui/Devices UI/AllDevice";
@@ -14,45 +14,23 @@ import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenC
 type Props = {
   showSetting?: boolean;
   noBackground?: boolean;
-  outputAudioDevices: MediaDeviceInfo[];
-  videoDevices: MediaDeviceInfo[];
-  audioPermission: boolean;
-  videoPermission: boolean;
-  setGetPermission: Dispatch<SetStateAction<boolean>>;
-  showListOfVideoDevices: boolean;
-  showListOfAudioDevices: boolean;
-  setShowListOfVideoDevices: Dispatch<SetStateAction<boolean>>;
-  setShowListOfAudioDevices: Dispatch<SetStateAction<boolean>>;
 };
 
-const Control = ({
-  showSetting,
-  noBackground,
-  outputAudioDevices,
-  videoDevices,
-  audioPermission,
-  videoPermission,
-  setGetPermission,
-  showListOfAudioDevices,
-  showListOfVideoDevices,
-  setShowListOfAudioDevices,
-  setShowListOfVideoDevices
-}: Props) => {
+const Control = ({ showSetting, noBackground }: Props) => {
   const { setShowModal } = useModalState();
-
+  const [showListOfAudioDevices, setShowListOfAudioDevices] = useState(false);
+  const [showListOfVideoDevices, setShowListOfVideoDevices] = useState(false);
+  const {
+    outputAudioDevices,
+    videoDevices,
+    audioPermission,
+    videoPermission,
+    setGetPermission
+  } = useCameraState();
   const { menuRef } = useCloseMenuWhenClickedOutside(setShowListOfAudioDevices);
   const { menuRef: videoDiv } = useCloseMenuWhenClickedOutside(
     setShowListOfVideoDevices
   );
-  // const {
-  //   outputAudioDevices,
-  //   videoDevices,
-  //   audioPermission,
-  //   videoPermission,
-  //   setGetPermission
-  // } = useChooseAudioVideo(showModal);
-  // const [showListOfAudioDevices, setShowListOfAudioDevices] = useState(false);
-  // const [showListOfVideoDevices, setShowListOfVideoDevices] = useState(false);
 
   useCloseModalWhenEscClicked();
 

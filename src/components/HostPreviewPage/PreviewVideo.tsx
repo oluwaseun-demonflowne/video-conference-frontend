@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import { RiUserLine } from "react-icons/ri";
 import Control from "./Control";
 import TypeName from "./TypeName";
@@ -11,8 +11,6 @@ const PreviewVideo = () => {
   const { cameraDisplay } = useCameraState();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  console.log(cameraDisplay);
-
   useEffect(() => {
     if (cameraDisplay === null) return;
     if (videoRef) {
@@ -22,16 +20,9 @@ const PreviewVideo = () => {
     }
   }, [cameraDisplay]);
 
-  const {
-    outputAudioDevices,
-    videoDevices,
-    audioPermission,
-    videoPermission,
-    setGetPermission
-  } = useChooseAudioVideo(showModal);
-  const [showListOfAudioDevices, setShowListOfAudioDevices] = useState(false);
-  const [showListOfVideoDevices, setShowListOfVideoDevices] = useState(false);
+  useChooseAudioVideo(showModal);
   
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex !h-60 !w-[400px] items-center justify-center overflow-hidden rounded-2xl bg-[#11131a]">
@@ -47,15 +38,6 @@ const PreviewVideo = () => {
         </div>
       </div>
       <Control
-        audioPermission={audioPermission}
-        outputAudioDevices={outputAudioDevices}
-        setGetPermission={setGetPermission}
-        setShowListOfAudioDevices={setShowListOfAudioDevices}
-        setShowListOfVideoDevices={setShowListOfVideoDevices}
-        showListOfAudioDevices={showListOfAudioDevices}
-        showListOfVideoDevices={showListOfVideoDevices}
-        videoDevices={videoDevices}
-        videoPermission={videoPermission}
         showSetting={true}
       />
       <TypeName />

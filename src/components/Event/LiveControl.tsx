@@ -29,7 +29,7 @@ const LiveControl = () => {
   const { setScreenToDisplay } = useScreenToDisplay();
 
   const { setShowModal } = useModalState();
-  return (
+  return (  
     <div className="flex items-center justify-between px-8 py-4">
       <Control />
       <div className="flex items-center gap-4">
