@@ -13,6 +13,7 @@ import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenC
 import LeaveEndStream from "../my-own-ui/LeaveEndStream";
 import StartSharing from "../my-own-ui/StartSharing";
 import SharePDF from "../my-own-ui/SharePDF";
+import { useChooseAudioVideo } from "@/custom hooks/useChooseAudioVideo";
 
 const LiveControl = () => {
   const [openMenuState, setOpenMenuState] = useState(false);
@@ -27,8 +28,9 @@ const LiveControl = () => {
     useCloseMenuWhenClickedOutside(setOpenStartSharing);
   const { showSideBar, setShowSideBar } = useSideBarState();
   const { setScreenToDisplay } = useScreenToDisplay();
+  const { setShowModal, showModal } = useModalState();
+  useChooseAudioVideo(showModal);
 
-  const { setShowModal } = useModalState();
   return (  
     <div className="flex items-center justify-between px-8 py-4">
       <Control />

@@ -53,6 +53,7 @@ export const useChooseAudioVideo = (showModal: boolean) => {
     };
 
     if (showModal || getPermission) {
+      if (videoPermission && audioPermission) return;
       getVideoDevices();
     }
 
