@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoadingIcon from "./LoadingIcon";
 import LiveControl from "./LiveControl";
 import SideBar from "../my-own-ui/SideBar/SideBar";
-import { useSideBarState } from "@/store";
+import { useCameraState, useSideBarState } from "@/store";
 import { IoStopCircleOutline } from "react-icons/io5";
 import EndStreamTopRight from "../my-own-ui/EndStreamTopRight";
 import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenClickedOutside";
@@ -15,6 +15,17 @@ const LiveVideo = () => {
   const [openRightStream, setOpenRightStream] = useState(false);
   const [showInvitedModal, setShowInvitedModal] = useState(false);
   const { menuRef } = useCloseMenuWhenClickedOutside(setOpenRightStream);
+  const { cameraDisplay } = useCameraState();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (cameraDisplay === null) return;
+    if (videoRef) {
+      if (videoRef.current) {
+        videoRef.current.srcObject = cameraDisplay;
+      }
+    }
+  }, [cameraDisplay]);
   return (
     <div className="flex h-screen flex-col justify-between">
       <div className="flex items-center justify-between px-8 py-4">
@@ -53,15 +64,21 @@ const LiveVideo = () => {
         </div>
       </div>
       <div className={`flex gap-4 ${showSideBar ? "px-8" : "px-28"}`}>
-        <div className="relative w-[100%]">
-          <Image
+        <div className="relative h-[75vh] w-[100%]">
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className={`h-full w-full object-cover ${showSideBar ? "rounded-xl" : ""}`} // Ensures video fills the container
+          />
+          {/* <Image
             src={"/seyi.png"}
             unoptimized
             className={`h-[80vh] w-[100%] ${showSideBar ? "rounded-xl" : ""} object-cover opacity-40`}
             alt="picture"
             width={100}
             height={100}
-          />
+          /> */}
           <div className="absolute left-[50%] top-[50%] flex flex-col items-center gap-3 text-[15px] font-semibold text-white">
             <LoadingIcon />
             Going live
