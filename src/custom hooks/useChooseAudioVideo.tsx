@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useCameraState } from "@/store";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export const useChooseAudioVideo = (showModal: boolean) => {
@@ -7,7 +8,9 @@ export const useChooseAudioVideo = (showModal: boolean) => {
   const [audioPermission, setAudioPermission] = useState(false);
   const [videoPermission, setVideoPermission] = useState(false);
   const [getPermission, setGetPermission] = useState(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  // const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { setShowCamera } = useCameraState();
+
   const [outputAudioDevices, setOutputAudioDevices] = useState<
     MediaDeviceInfo[]
   >([]);
@@ -27,11 +30,13 @@ export const useChooseAudioVideo = (showModal: boolean) => {
         const videoInputs = devices.filter(
           (device) => device.kind === "videoinput"
         );
-        if (videoRef) {
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-          }
-        }
+        setShowCamera(stream);
+
+        // if (videoRef) {
+        //   if (videoRef.current) {
+        //     videoRef.current.srcObject = stream;
+        //   }
+        // }
         setVideoDevices(videoInputs);
         const audioInputs = devices.filter(
           (device) => device.kind === "audioinput"
@@ -52,18 +57,18 @@ export const useChooseAudioVideo = (showModal: boolean) => {
       getVideoDevices();
     } // Call the function to get devices
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        const stream = videoRef.current.srcObject as MediaStream;
-        const tracks = stream.getTracks();
-        tracks.forEach((track) => {
-          track.stop();
-        });
-      }
+      // setShowCamera(null)
+      // if (videoRef.current && videoRef.current.srcObject) {
+      //   // eslint-disable-next-line react-hooks/exhaustive-deps
+      //   const stream = videoRef.current.srcObject as MediaStream;
+      //   const tracks = stream.getTracks();
+      //   tracks.forEach((track) => {
+      //     track.stop();
+      //   });
+      // }
     };
   }, [showModal, getPermission]);
   return {
-    videoRef,
     videoDevices,
     audioDevices,
     outputAudioDevices,

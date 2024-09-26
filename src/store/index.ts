@@ -9,6 +9,13 @@ type SideBarState = {
 type ScreenState = {
   screenToDisplay: "chats" | "participant";
 };
+type CameraState = {
+  cameraDisplay: MediaStream | null;
+};
+
+type CameraAction = {
+  setShowCamera: (state: MediaStream | null) => void;
+};
 
 type Action = {
   setShowModal: (state: boolean) => void;
@@ -40,3 +47,9 @@ export const useScreenToDisplay = create<ScreenState & ScreenStateAction>(
     }
   })
 );
+export const useCameraState = create<CameraState & CameraAction>((set) => ({
+  cameraDisplay: null,
+  setShowCamera: (state) => {
+    set(() => ({ cameraDisplay: state }));
+  }
+}));

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LiaTimesSolid } from "react-icons/lia";
 import {
   Select,
@@ -12,42 +12,45 @@ import { useModalState } from "@/store";
 import { FiVideo } from "react-icons/fi";
 import { AiOutlineAudio } from "react-icons/ai";
 import { SpeakerIcon } from "lucide-react";
+import { useChooseAudioVideo } from "@/custom hooks/useChooseAudioVideo";
 
 const Device = () => {
-  const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
-  const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
-  const [outputAudioDevices, setOutputAudioDevices] = useState<
-    MediaDeviceInfo[]
-  >([]);
+  // const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
+  // const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
+  // const [outputAudioDevices, setOutputAudioDevices] = useState<
+  //   MediaDeviceInfo[]
+  // >([]);
   const { showModal, setShowModal } = useModalState();
+  const { videoDevices, audioDevices, outputAudioDevices } =
+    useChooseAudioVideo(showModal);
   const [_volumeCurrent, setVolumeCurrent] = useState(100);
-  //   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
-  //   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
-  useEffect(() => {
-    const getVideoDevices = async () => {
-      try {
-        // await navigator.mediaDevices.getUserMedia({ video: true });
-        // await navigator.mediaDevices.getUserMedia({ audio: true });
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        console.log(devices);
-        const videoInputs = devices.filter(
-          (device) => device.kind === "videoinput"
-        );
-        setVideoDevices(videoInputs);
-        const audioInputs = devices.filter(
-          (device) => device.kind === "audioinput"
-        );
-        setAudioDevices(audioInputs);
-        const audioOuputs = devices.filter(
-          (device) => device.kind === "audiooutput"
-        );
-        setOutputAudioDevices(audioOuputs);
-      } catch (err) {
-        console.error("Error accessing video?audio devices:", err);
-      }
-    };
-    if (showModal) getVideoDevices(); // Call the function to get devices
-  }, [showModal]);
+  // //   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
+  // //   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
+  // useEffect(() => {
+  //   const getVideoDevices = async () => {
+  //     try {
+  //       // await navigator.mediaDevices.getUserMedia({ video: true });
+  //       // await navigator.mediaDevices.getUserMedia({ audio: true });
+  //       const devices = await navigator.mediaDevices.enumerateDevices();
+  //       console.log(devices);
+  //       const videoInputs = devices.filter(
+  //         (device) => device.kind === "videoinput"
+  //       );
+  //       setVideoDevices(videoInputs);
+  //       const audioInputs = devices.filter(
+  //         (device) => device.kind === "audioinput"
+  //       );
+  //       setAudioDevices(audioInputs);
+  //       const audioOuputs = devices.filter(
+  //         (device) => device.kind === "audiooutput"
+  //       );
+  //       setOutputAudioDevices(audioOuputs);
+  //     } catch (err) {
+  //       console.error("Error accessing video?audio devices:", err);
+  //     }
+  //   };
+  //   if (showModal) getVideoDevices(); // Call the function to get devices
+  // }, [showModal]);
 
   return (
     <div className="h-[460px] w-[400px] bg-[#191b23] p-4">

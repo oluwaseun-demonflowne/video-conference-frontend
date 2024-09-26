@@ -9,6 +9,7 @@ import { HiEllipsisVertical } from "react-icons/hi2";
 import { useCloseModalWhenEscClicked } from "@/custom hooks/useCloseModalWhenEscClicked";
 import AllDevice from "../my-own-ui/Devices UI/AllDevice";
 import { toast } from "sonner";
+import { useCloseMenuWhenClickedOutside } from "@/custom hooks/useCloseMenuWhenClickedOutside";
 
 type Props = {
   showSetting?: boolean;
@@ -38,6 +39,11 @@ const Control = ({
   setShowListOfVideoDevices
 }: Props) => {
   const { setShowModal } = useModalState();
+
+  const { menuRef } = useCloseMenuWhenClickedOutside(setShowListOfAudioDevices);
+  const { menuRef: videoDiv } = useCloseMenuWhenClickedOutside(
+    setShowListOfVideoDevices
+  );
   // const {
   //   outputAudioDevices,
   //   videoDevices,
@@ -54,6 +60,7 @@ const Control = ({
     <div className="flex items-center justify-between">
       <div className="flex gap-3">
         <div
+          ref={menuRef}
           className={`flex w-16 items-center justify-between ${noBackground ? "border border-gray-700" : "bg-[#2e3038]"} rounded-md py-2 pl-2`}>
           <button>
             {audioPermission ? (
@@ -85,6 +92,7 @@ const Control = ({
           </div>
         </div>
         <div
+          ref={videoDiv}
           className={`flex w-16 items-center justify-between ${noBackground ? "border border-gray-700" : "bg-[#2e3038]"} rounded-md py-2 pl-2`}>
           <button>
             {videoPermission ? (
