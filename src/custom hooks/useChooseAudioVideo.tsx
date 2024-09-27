@@ -60,7 +60,7 @@ export const useChooseAudioVideo = (showModal: boolean) => {
     return () => {
       // Cleanup logic if necessary
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showModal, getPermission]);
 
   return {

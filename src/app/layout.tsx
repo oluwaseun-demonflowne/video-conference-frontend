@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Oxanium } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
 const inter = Oxanium({ subsets: ["latin"] });
@@ -17,7 +16,8 @@ export default function RootLayout({
   session
 }: Readonly<{
   children: React.ReactNode;
-  session: Session;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  session: any;
 }>) {
   return (
     <html lang="en">
