@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { RiUserLine } from "react-icons/ri";
 import Control from "./Control";
 import TypeName from "./TypeName";
@@ -21,7 +21,6 @@ const PreviewVideo = () => {
   }, [cameraDisplay]);
 
   useChooseAudioVideo(showModal);
-  
 
   return (
     <div className="flex flex-col gap-5">
@@ -37,9 +36,7 @@ const PreviewVideo = () => {
           <RiUserLine className="text-2xl" />
         </div>
       </div>
-      <Control
-        showSetting={true}
-      />
+      <Control showSetting={true} />
       <TypeName />
     </div>
   );

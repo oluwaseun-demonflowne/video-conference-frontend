@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 export const {
   auth,
-  handlers: { GET, POST },
+  handlers: { GET, POST }
 } = NextAuth({
   providers: [
     GoogleProvider({
@@ -14,10 +14,10 @@ export const {
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code",
-        },
-      },
-    }),
+          response_type: "code"
+        }
+      }
+    })
   ],
   callbacks: {
     session: ({ session, token }) => {
@@ -26,21 +26,22 @@ export const {
         user: {
           ...session.user,
           id: token.id as string,
-          randomKey: token.randomKey,
-        },
+          randomKey: token.randomKey
+        }
       };
     },
     jwt: ({ token, user }) => {
       if (user) {
-        const u = user ;
+        const u = user;
         return {
           ...token,
           id: u.id,
-          randomKey: u.randomKey,
+          // @ts-expect-error i do not know
+          randomKey: u.randomKey
         };
       }
       return token;
-    },
+    }
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET
 });

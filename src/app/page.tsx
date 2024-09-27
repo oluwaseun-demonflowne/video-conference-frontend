@@ -16,7 +16,7 @@ const Page = () => {
     });
   }, []);
   return (
-    <div className="flex items-center justify-center pt-10">
+    <div className="flex h-screen items-center justify-center">
       <div className="flex w-[450px] flex-col gap-10 rounded-lg bg-[#191b23] p-10">
         <p className="text-[15px] font-light">Welcome to Confrenza</p>
         <div className="mt-[-20px] flex items-center justify-center gap-4 text-2xl font-medium">

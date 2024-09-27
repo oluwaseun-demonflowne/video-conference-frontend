@@ -25,7 +25,7 @@ export const useChooseAudioVideo = (showModal: boolean) => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio:true
+          audio: true
         });
         setVideoPermission(true);
         setAudioPermission(true);

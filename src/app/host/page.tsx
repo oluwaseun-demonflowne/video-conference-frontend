@@ -1,3 +1,4 @@
+"use client";
 import PreviewVideo from "@/components/HostPreviewPage/PreviewVideo";
 
 export default function Home() {

@@ -9,8 +9,8 @@ type SideBarAction = {
 };
 
 export const useSideBarState = create<SideBarState & SideBarAction>((set) => ({
-    showSideBar: false,
-    setShowSideBar: (state) => {
-      set(() => ({ showSideBar: state }));
-    }
-  }));
+  showSideBar: false,
+  setShowSideBar: (state) => {
+    set(() => ({ showSideBar: state }));
+  }
+}));
