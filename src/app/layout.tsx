@@ -3,6 +3,7 @@ import { Oxanium } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { SessionProvider } from "next-auth/react";
+import { SocketProvider } from "@/providers/Socket";
 
 const inter = Oxanium({ subsets: ["latin"] });
 
@@ -20,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          <Toaster visibleToasts={1} />
-          {children}
+          <SocketProvider>
+            <Toaster visibleToasts={1} />
+            {children}
+          </SocketProvider>
         </SessionProvider>
       </body>
     </html>
