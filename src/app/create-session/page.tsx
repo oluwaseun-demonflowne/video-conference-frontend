@@ -3,15 +3,16 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { createEvent } from "@/actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [eventName, setEventName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
   useGSAP(() => {
     gsap.to(".box", {
       duration: 3,
@@ -33,25 +34,38 @@ const Page = () => {
             unoptimized
             className="box w-10"
           />
-          <p>Start a session</p>
+          <p>Create session</p>
         </div>
-        <form className="flex flex-col gap-5">
-          <div className="flex flex-col text-[15px]">
-            <label htmlFor="username">Fullname</label>
-            <input
-              value={fullName}
-              onChange={(e) => {
-                setFullName(e.currentTarget.value);
-              }}
-              required
-              type="text"
-              id="username"
-              className="h-10 rounded-lg bg-[#272a31] pl-4 text-[15px] text-gray-400 outline-[#3d8fff]"
-            />
-          </div>
+        <form
+          onSubmit={async (e) => {
+            setLoading(true);
+            toast.loading("Creating event...", { position: "top-center" });
+            e.preventDefault();
+            // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
+            const get = await createEvent(eventName);
+            if (get?.error === "23505") {
+              toast.error("Event already exists", {
+                position: "top-center"
+              });
+              setLoading(false);
+            } else if (get?.success === 200) {
+              toast.success("Event created sucessfully", {
+                position: "top-center"
+              });
+              push("/join-session");
+            } else {
+              toast.error("Unknown error, Please retry :(", {
+                position: "top-center"
+              });
+              setLoading(false);
+            }
+            toast.dismiss();
+          }}
+          className="mt-[-10px] flex flex-col gap-5">
           <div className="flex flex-col text-[15px]">
             <label htmlFor="email">Email</label>
             <input
+              required
               value={email}
               onChange={(e) => {
                 setEmail(e.currentTarget.value);
@@ -73,22 +87,9 @@ const Page = () => {
               className="h-10 rounded-lg bg-[#272a31] pl-4 text-[15px] text-gray-400 outline-[#3d8fff]"
             />
           </div>
-          <button className="h-12 rounded-md bg-[#3d8fff]">
-            Enter Session
-          </button>
           <button
-            onClick={() => {
-              if (eventName.length < 3) {
-                return toast.error("Event field missing", {
-                  position: "top-center"
-                });
-              }
-              signIn("google", { callbackUrl: "/host" });
-            }}
-            type="button"
-            className="mt-[-10px] flex h-12 items-center justify-center gap-3 rounded-md border">
-            <FcGoogle />
-            <p>Login with Google</p>
+            className={`h-12 rounded-md ${loading ? "pointer-events-none opacity-40" : ""} bg-[#3d8fff]`}>
+            Create Session
           </button>
         </form>
         <Link className="text-[15px] font-light underline" href="/join-session">

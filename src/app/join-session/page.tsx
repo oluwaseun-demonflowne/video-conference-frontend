@@ -82,7 +82,7 @@ const Page = () => {
                   position: "top-center"
                 });
               }
-              signIn("google", { callbackUrl: "/user" });
+              signIn("google", { event: eventName, callbackUrl: "/host" });
             }}
             type="button"
             className="mt-[-10px] flex h-12 items-center justify-center gap-3 rounded-md border">
@@ -92,7 +92,7 @@ const Page = () => {
         </form>
         <Link
           className="text-[15px] font-light underline"
-          href="/start-session">
+          href="/create-session">
           Create your own session?
         </Link>
       </div>

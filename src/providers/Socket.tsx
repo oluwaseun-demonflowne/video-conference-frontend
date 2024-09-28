@@ -22,7 +22,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   // const { setGetOnlineUsers } = useSocketStateZustand();
-
   useEffect(() => {
     const socket: Socket = io("http://localhost:5002");
 
