@@ -1,5 +1,6 @@
 "use client";
-import React, { type Dispatch, type SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, type Dispatch, type SetStateAction } from "react";
 import { TbInfoTriangle } from "react-icons/tb";
 
 export const session = {
@@ -30,6 +31,8 @@ const EndLeaveSession = ({
   EndLeaveSession,
   setEndLeaveSessionOpen
 }: Props) => {
+  const { push } = useRouter();
+  const [loading, setLoading] = useState(false);
   if (!EndLeaveSession.state) {
     return null;
   }
@@ -51,10 +54,15 @@ const EndLeaveSession = ({
               setEndLeaveSessionOpen((prev) => ({ ...prev, state: false }));
             }}
             type="button"
-            className="h-12 w-[50%] rounded-md border border-slate-600">
+            className={`h-12 ${loading ? "pointer-events-none opacity-40" : ""} w-[50%] rounded-md border border-slate-600`}>
             Cancel
           </button>
-          <button className="h-12 w-[50%] rounded-md bg-[#c74e5b]">
+          <button
+            onClick={() => {
+              setLoading(true);
+              push(`/${EndLeaveSession.whichSession}`);
+            }}
+            className={`h-12 ${loading ? "pointer-events-none opacity-40" : ""} w-[50%] rounded-md bg-[#c74e5b]`}>
             Leave Session
             {/* {menuToRender === "embedUrl" ? "Embed and Share" : "Change"} */}
           </button>

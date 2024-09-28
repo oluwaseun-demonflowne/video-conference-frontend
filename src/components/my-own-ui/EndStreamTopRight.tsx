@@ -1,5 +1,6 @@
 "use client";
-import React, { type Dispatch, type SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, type Dispatch, type SetStateAction } from "react";
 
 const session = {
   end: {
@@ -14,6 +15,8 @@ type Props = {
 };
 
 const EndStreamTopRight = ({ openRightStream, setOpenRightStream }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
   if (!openRightStream) return null;
   return (
     <div className="absolute right-0 top-11 z-[90] flex w-[280px] flex-col justify-center gap-3 overflow-hidden rounded-xl bg-[#11131a] p-5">
@@ -24,10 +27,15 @@ const EndStreamTopRight = ({ openRightStream, setOpenRightStream }: Props) => {
             setOpenRightStream(false);
           }}
           type="button"
-          className="h-12 w-[50%] rounded-md border border-slate-600">
+          className={`h-12 w-[50%] ${loading ? "pointer-events-none opacity-40" : ""} rounded-md border border-slate-600`}>
           Cancel
         </button>
-        <button className="h-12 w-[50%] rounded-md bg-[#c74e5b]">
+        <button
+        onClick={() => {
+          setLoading(true);
+          push("/end");
+        }}
+          className={`h-12 ${loading ? "pointer-events-none opacity-40" : ""} w-[50%] rounded-md bg-[#c74e5b]`}>
           End
           {/* {menuToRender === "embedUrl" ? "Embed and Share" : "Change"} */}
         </button>
