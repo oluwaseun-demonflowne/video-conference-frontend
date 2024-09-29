@@ -31,10 +31,10 @@ const EndStreamTopRight = ({ openRightStream, setOpenRightStream }: Props) => {
           Cancel
         </button>
         <button
-        onClick={() => {
-          setLoading(true);
-          push("/end");
-        }}
+          onClick={() => {
+            setLoading(true);
+            push("/end");
+          }}
           className={`h-12 ${loading ? "pointer-events-none opacity-40" : ""} w-[50%] rounded-md bg-[#c74e5b]`}>
           End
           {/* {menuToRender === "embedUrl" ? "Embed and Share" : "Change"} */}

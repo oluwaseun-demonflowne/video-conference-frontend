@@ -25,7 +25,7 @@ const HandRaisedMenu = ({
   }
 
   return (
-    <div className="top-[1% * 10] fixed right-16 !z-[99999] flex w-[200px] flex-col rounded-md border border-gray-600 bg-[#191b23] font-medium">
+    <div className=" fixed right-16 !z-[99999] flex w-[200px] flex-col rounded-md border border-gray-600 bg-[#191b23] font-medium">
       <button
         onClick={() => {
           setOpenMenu(false);

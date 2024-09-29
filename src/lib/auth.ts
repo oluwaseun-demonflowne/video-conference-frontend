@@ -8,7 +8,7 @@ import GoogleProvider from "next-auth/providers/google";
 export const {
   auth,
   handlers: { GET, POST }
-} = NextAuth( {
+} = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -17,38 +17,14 @@ export const {
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"
+          response_type: "code",
+          eventType: "admin"
         }
       }
     })
   ],
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) { console.log(${req.query.username}) // example-username }
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   console.log(credentials)
-    //   return true
-    // },
-    // session: async ({ session, token }) => {
-    //   if (!session.user) {
-    //     throw new Error("No session");
-    //   }
-    //   const profile = await db.query.EventSchema.findFirst({
-    //     where: eq(EventSchema.admin, session.user.email!)
-    //   });
-    //   return {
-    //     ...session,
-    //     user: {
-    //       ...session.user,
-    //       id: token.id as string,
-    //       randomKey: token.randomKey,
-    //       role: profile?.admin === session.user.email ? "admin" : "viewer"
-    //     }
-    //   };
-    // },
     jwt: ({ token, user }) => {
-      // if (req?.query?.eventName) {
-      //   token.eventName = req.query.eventName; // Store it in the token
-      // }
       if (user) {
         const u = user;
         return {
@@ -73,7 +49,8 @@ export const {
           ...session.user,
           id: token.id as string,
           randomKey: token.randomKey,
-          role: profile?.admin === session.user.email ? "admin" : "viewer"
+          role: profile?.admin === session.user.email ? "admin" : "viewer",
+          eventName: ""
         }
       };
     }
