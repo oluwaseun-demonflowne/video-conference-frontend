@@ -1,24 +1,16 @@
 "use client";
-import { useEventNameState, useModalState } from "@/store";
+import { useModalState } from "@/store";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiSignal } from "react-icons/hi2";
 
 const TypeName = () => {
   const { showModal } = useModalState();
   const { push } = useRouter();
   const [hostName, setHostName] = useState("");
-  const { data: session, update } = useSession();
+  const { data: session } = useSession();
   const defaultHostName = session?.user?.name || "";
-  const { eventName } = useEventNameState();
-  console.log(eventName, session)
-
-  useEffect(() => {
-    if (eventName !== "") {
-      update({ ...session!.user, eventName: eventName });
-    }
-  }, [eventName, session]);
 
   return (
     <form

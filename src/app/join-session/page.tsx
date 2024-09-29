@@ -7,13 +7,12 @@ import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { useEventNameState } from "@/store";
+import { setEvent } from "@/actions";
 
 const Page = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [eventName, setEventName] = useState("");
-  const {setEventName:EventName} = useEventNameState()
   useGSAP(() => {
     gsap.to(".box", {
       duration: 3,
@@ -84,7 +83,7 @@ const Page = () => {
                   position: "top-center"
                 });
               }
-              EventName(eventName)
+              setEvent(eventName);
               signIn("google", { event: eventName, callbackUrl: "/host" });
             }}
             type="button"
